@@ -35,23 +35,23 @@ jobs:
         run: |
           pytest
 
-  deploy:
-    name: Deploy to Render
-    needs: build-and-test  # Este job só será executado se o job 'build-and-test' for bem-sucedido
-    runs-on: ubuntu-latest
-    if: success()
+  # deploy:
+  #   name: Deploy to Render
+  #   needs: build-and-test  # Este job só será executado se o job 'build-and-test' for bem-sucedido
+  #   runs-on: ubuntu-latest
+  #   if: success()
 
-    steps:
-      # Step 1: Faz o checkout do código (necessário novamente)
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #   steps:
+  #     # Step 1: Faz o checkout do código (necessário novamente)
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      # Step 2: Dispara o deploy para o Render usando o Deploy Hook
-      - name: Deploy to Render
-        run: |
-            curl -X POST \
-            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
-            -H "Accept: application/json" \
-            -H "Content-Type: application/json" \
-            --data '{"serviceId": "usr-crfllg08fa8c73d87edg"}' \
-            https://api.render.com/v1/services/usr-crfllg08fa8c73d87edg/deploys
+  #     # Step 2: Dispara o deploy para o Render usando o Deploy Hook
+  #     - name: Deploy to Render
+  #       run: |
+  #           curl -X POST \
+  #           -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+  #           -H "Accept: application/json" \
+  #           -H "Content-Type: application/json" \
+  #           --data '{"serviceId": "usr-crfllg08fa8c73d87edg"}' \
+  #           https://api.render.com/v1/services/usr-crfllg08fa8c73d87edg/deploys
